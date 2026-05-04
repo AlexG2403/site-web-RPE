@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RPE — École maternelle de la Plaine, Chevannes</title>
+<style>
+  :root {
+    --violet: #7e3c9c;
+    --bleu: #2563a8;
+    --bleu-clair: #e8f1fb;
+    --jaune: #f5b942;
+    --vert: #6bb05f;
+    --teal: #5fa8a0;
+    --rose: #e87a8a;
+    --corail: #e8645a;
+    --gris-fond: #faf7f2;
+    --gris-texte: #2a2a2a;
+    --gris-doux: #6b6b6b;
+    --bordure: #e5e1d9;
+    --radius: 14px;
+    --ombre: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--gris-fond);
+    color: var(--gris-texte);
+    line-height: 1.55;
+    min-height: 100vh;
+  }
+  a { color: var(--bleu); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  header.site {
+    background: white;
+    border-bottom: 1px solid var(--bordure);
+    padding: 18px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--violet);
+  }
+  .logo-mark {
+    width: 42px; height: 42px;
+    background: linear-gradient(135deg, var(--jaune) 0%, var(--rose) 50%, var(--teal) 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+  }
+  .logo small { display: block; font-weight: 400; color: var(--gris-doux); font-size: 12px; }
+
+  nav.principal {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  nav.principal button {
+    background: transparent;
+    border: none;
+    padding: 9px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--gris-texte);
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: inherit;
+  }
+  nav.principal button:hover { background: #f3eaf7; }
+  nav.principal button.active {
+    background: var(--violet);
+    color: white;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, var(--violet) 0%, #a559c4 100%);
+    color: white;
+    padding: 56px 32px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -30px; left: -30px;
+    width: 120px; height: 120px;
+    background: var(--jaune);
+    border-radius: 50%;
+    opacity: 0.25;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; right: -20px;
+    width: 160px; height: 160px;
+    background: var(--rose);
+    border-radius: 50%;
+    opacity: 0.25;
+  }
+  .hero h1 {
+    font-size: 36px;
+    margin-bottom: 12px;
+    font-weight: 700;
+    position: relative;
+  }
+  .hero p {
+    font-size: 17px;
+    opacity: 0.95;
+    max-width: 680px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .hero .sous-titre {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    margin-bottom: 16px;
+    letter-spacing: 0.3px;
+    position: relative;
+  }
+
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+  .page { display: none; }
+  .page.active { display: block; }
+
+  h2.section-titre {
+    font-size: 28px;
+    margin-bottom: 8px;
+    color: var(--violet);
+  }
+  h2.section-titre + .section-intro { margin-bottom: 28px; }
+  h3.sous-section {
+    font-size: 18px;
+    margin: 36px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--bordure);
+    color: var(--gris-texte);
+  }
+  .section-intro {
+    color: var(--gris-doux);
+    margin-bottom: 32px;
+    font-size: 15px;
+  }
+
+  .grille {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+  .card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 22px;
+    box-shadow: var(--ombre);
+    border: 1px solid var(--bordure);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+
+  .accueil-grille {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    margin-top: 24px;
+  }
+  .tuile {
+    background: white;
+    border-radius: var(--radius);
+    padding: 28px 22px;
+    border: 1px solid var(--bordure);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+    box-shadow: var(--ombre);
+    font-family: inherit;
+  }
+  .tuile:hover { border-color: var(--violet); transform: translateY(-3px); }
+  .tuile-icone {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 14px;
+  }
+  .tuile h3 { font-size: 16px; margin-bottom: 6px; }
+  .tuile p { font-size: 13px; color: var(--gris-doux); }
+
+  .evenement {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .date-bloc {
+    flex-shrink: 0;
+    text-align: center;
+    border-radius: 999px;
+    padding: 10px 16px;
+    min-width: 70px;
+    color: white;
+  }
+  .date-bloc.jaune { background: var(--jaune); color: #5a3f00; }
+  .date-bloc.rose { background: var(--rose); }
+  .date-bloc.bleu { background: #a8d4eb; color: #1a4a6b; }
+  .date-bloc.teal { background: var(--teal); }
+  .date-bloc.corail { background: var(--corail); }
+  .date-bloc.violet { background: var(--violet); }
+  .date-bloc.vert { background: var(--vert); }
+  .date-bloc .jour {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+  .date-bloc .mois {
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .evenement-corps h3 { font-size: 17px; margin-bottom: 4px; }
+  .evenement-corps .meta {
+    font-size: 13px;
+    color: var(--gris-doux);
+    margin-bottom: 10px;
+  }
+  .evenement-corps p { font-size: 14px; margin-bottom: 12px; }
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    margin-right: 6px;
+    margin-bottom: 4px;
+  }
+  .badge.rpe { background: #f3eaf7; color: var(--violet); }
+  .badge.ecole { background: var(--bleu-clair); color: var(--bleu); }
+  .badge.passe { background: #ececec; color: #777; }
+  .btn {
+    background: var(--violet);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .btn:hover { background: #5e2c75; }
+  .btn-secondaire {
+    background: white;
+    color: var(--violet);
+    border: 1px solid var(--violet);
+  }
+  .btn-secondaire:hover { background: #f3eaf7; }
+
+  .qr-formulaire {
+    background: white;
+    border-radius: var(--radius);
+    padding: 24px;
+    border: 1px solid var(--bordure);
+    margin-bottom: 32px;
+    box-shadow: var(--ombre);
+  }
+  .qr-formulaire h3 { margin-bottom: 12px; }
+  .qr-formulaire input, .qr-formulaire textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--bordure);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+  .qr-formulaire input:focus, .qr-formulaire textarea:focus {
+    outline: none;
+    border-color: var(--violet);
+  }
+  .question-item {
+    background: white;
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    border: 1px solid var(--bordure);
+    margin-bottom: 14px;
+    box-shadow: var(--ombre);
+  }
+  .question-item .q {
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .question-item .auteur {
+    font-size: 12px;
+    color: var(--gris-doux);
+    margin-bottom: 14px;
+  }
+  .reponse {
+    background: #f3eaf7;
+    border-left: 3px solid var(--violet);
+    padding: 12px 14px;
+    border-radius: 6px;
+    margin-top: 10px;
+  }
+  .reponse .auteur-rep {
+    font-size: 12px;
+    color: var(--violet);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .reponse-attente {
+    font-size: 13px;
+    color: var(--gris-doux);
+    font-style: italic;
+    padding: 8px 0;
+  }
+
+  .rpe-section { margin-bottom: 32px; }
+  .rpe-grille {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+  .rpe-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 22px;
+    text-align: center;
+    border: 1px solid var(--bordure);
+    box-shadow: var(--ombre);
+  }
+  .avatar {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    margin: 0 auto 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 600;
+    color: white;
+  }
+  .avatar.c1 { background: linear-gradient(135deg, var(--violet), #a559c4); }
+  .avatar.c2 { background: linear-gradient(135deg, var(--jaune), #e69b1f); color: #5a3f00; }
+  .avatar.c3 { background: linear-gradient(135deg, var(--vert), #4a8a40); }
+  .avatar.c4 { background: linear-gradient(135deg, var(--rose), #c75566); }
+  .avatar.c5 { background: linear-gradient(135deg, var(--teal), #3f7e77); }
+  .avatar.c6 { background: linear-gradient(135deg, var(--corail), #b0463d); }
+  .rpe-card h3 { font-size: 16px; margin-bottom: 4px; }
+  .rpe-card .role {
+    font-size: 11px;
+    color: var(--violet);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+  }
+  .rpe-card p { font-size: 13px; color: var(--gris-doux); margin-bottom: 14px; }
+
+  .info-bloc {
+    background: white;
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    border: 1px solid var(--bordure);
+    box-shadow: var(--ombre);
+    margin-bottom: 24px;
+  }
+  .info-bloc h3 {
+    color: var(--violet);
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+  .info-bloc p { font-size: 14px; margin-bottom: 8px; }
+  .info-bloc a { font-weight: 500; }
+
+  .doc-liste {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .doc-item {
+    background: white;
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    border: 1px solid var(--bordure);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: var(--ombre);
+    transition: transform 0.15s;
+  }
+  .doc-item:hover { transform: translateX(3px); border-color: var(--violet); }
+  .doc-icone {
+    width: 44px; height: 44px;
+    background: #fadce0;
+    color: #b03a4a;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+  .doc-info { flex-grow: 1; }
+  .doc-info h4 { font-size: 15px; margin-bottom: 2px; }
+  .doc-info .meta { font-size: 12px; color: var(--gris-doux); }
+  .doc-action {
+    color: var(--violet);
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  footer {
+    background: white;
+    border-top: 1px solid var(--bordure);
+    padding: 30px 24px;
+    text-align: center;
+    color: var(--gris-doux);
+    font-size: 13px;
+  }
+  footer p { margin-bottom: 4px; }
+  footer a { color: var(--violet); }
+
+  @media (max-width: 600px) {
+    header.site { padding: 14px 18px; }
+    .hero { padding: 40px 20px; }
+    .hero h1 { font-size: 26px; }
+    nav.principal button { padding: 7px 12px; font-size: 13px; }
+    .evenement { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="logo">
+    <div class="logo-mark">🌸</div>
+    <div>
+      École maternelle de la Plaine
+      <small>Représentants des parents d'élèves · Chevannes</small>
+    </div>
+  </div>
+  <nav class="principal">
+    <button class="nav-btn active" data-page="accueil">Accueil</button>
+    <button class="nav-btn" data-page="evenements">Événements</button>
+    <button class="nav-btn" data-page="questions">Questions / Réponses</button>
+    <button class="nav-btn" data-page="rpe">Vos représentants</button>
+    <button class="nav-btn" data-page="documents">Comptes-rendus</button>
+  </nav>
+</header>
+
+<section class="page active" id="page-accueil">
+  <div class="hero">
+    <span class="sous-titre">Année scolaire 2025–2026</span>
+    <h1>Bienvenue les parents !</h1>
+    <p>Retrouvez ici les événements organisés par les RPE, les sorties scolaires de l'école, les comptes-rendus du conseil d'école, et un espace pour poser vos questions à vos représentants.</p>
+  </div>
+  <main>
+    <h2 class="section-titre">Que voulez-vous faire ?</h2>
+    <p class="section-intro">Choisissez un espace ci-dessous pour démarrer.</p>
+    <div class="accueil-grille">
+      <button class="tuile" data-page="evenements">
+        <div class="tuile-icone" style="background: #fef3d8;">📅</div>
+        <h3>Voir les événements</h3>
+        <p>Cross déguisé, kermesse, sorties scolaires : ne ratez rien des temps forts.</p>
+      </button>
+      <button class="tuile" data-page="questions">
+        <div class="tuile-icone" style="background: #f3eaf7;">💬</div>
+        <h3>Poser une question</h3>
+        <p>Une interrogation ? Les RPE relaient et vous répondent.</p>
+      </button>
+      <button class="tuile" data-page="rpe">
+        <div class="tuile-icone" style="background: #d8e8d4;">👨‍👩‍👧</div>
+        <h3>Vos représentants</h3>
+        <p>Découvrez les 6 parents qui vous représentent au conseil d'école.</p>
+      </button>
+      <button class="tuile" data-page="documents">
+        <div class="tuile-icone" style="background: #fadce0;">📄</div>
+        <h3>Comptes-rendus</h3>
+        <p>Lisez les PV des conseils d'école et le règlement intérieur.</p>
+      </button>
+    </div>
+
+    <h3 class="sous-section">À ne pas manquer prochainement</h3>
+    <div class="grille">
+      <article class="card">
+        <div class="evenement">
+          <div class="date-bloc teal">
+            <div class="jour">30</div>
+            <div class="mois">Mai</div>
+          </div>
+          <div class="evenement-corps">
+            <span class="badge rpe">Événement RPE</span>
+            <h3>Cross déguisé</h3>
+            <p class="meta">Samedi 30 mai · La Chevannaise la plus folle de l'année</p>
+            <p>Mélange de Chevannaise et de carnaval. Déguisements et sourires obligatoires !</p>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="evenement">
+          <div class="date-bloc corail">
+            <div class="jour">20</div>
+            <div class="mois">Juin</div>
+          </div>
+          <div class="evenement-corps">
+            <span class="badge rpe">Événement RPE</span>
+            <h3>Fête des écoles</h3>
+            <p class="meta">Samedi 20 juin · Une journée pour fêter l'année écoulée</p>
+            <p>Rires, jeux et soleil (on espère !) au programme.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+</section>
+
+<section class="page" id="page-evenements">
+  <main>
+    <h2 class="section-titre">Calendrier des événements</h2>
+    <p class="section-intro">
+      <span class="badge rpe">Événement RPE</span> Organisé par les représentants des parents d'élèves.
+      <span class="badge ecole" style="margin-left: 12px;">Sortie scolaire</span> Organisée par l'école.
+    </p>
+
+    <h3 class="sous-section">À venir</h3>
+    <div class="grille">
+
+      <article class="card">
+        <div class="evenement">
+          <div class="date-bloc bleu">
+            <div class="jour">05</div>
+            <div class="mois">Mai</div>
+          </div>
+          <div class="evenement-corps">
+            <span class="badge ecole">Sortie scolaire</span>
+            <h3>Olympiades à Champcueil</h3>
+            <p class="meta">Mardi 5 mai · Avec l'école maternelle de Champcueil</p>
+            <p>Une journée sportive pour les élèves. Quelques parents accompagnateurs ont déjà été mobilisés.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="evenement">
+          <div class="date-bloc teal">
+            <div class="jour">30</div>
+            <div class="mois">Mai</div>
+          </div>
+          <div class="evenement-corps">
+            <span class="badge rpe">Événement RPE</span>
+            <h3>Cross déguisé</h3>
+            <p class="meta">Samedi 30 mai · La Chevannaise la plus folle de l'année</p>
+            <p>Mélange de Chevannaise et de carnaval. Déguisements et sourires obligatoires !</p>
+            <button class="btn">J'y serai</button>
+            <button class="btn btn-secondaire">Aider à l'organisation</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="evenement">
+          <div class="date-bloc bleu">
+            <div class="jour">15</div>
+            <div class="mois">Juin</div>
+          </div>
+          <div class="evenement-corps">
+            <span class="badge ecole">Sortie scolaire</span>
+            <h3>Expert en rapaces</h3>
+            <p class="meta">Lundi 15 juin · Dans le cadre de la semaine de l'air</p>
+            <p>Un expert vient à l'école avec ses oiseaux pour une rencontre avec les enfants.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="evenement">
+          <div class="date-bloc corail">
+            <div class="jour">20</div>
+            <div class="mois">Juin</div>
+          </div>
+          <div class="evenement-corps">
+            <span class="badge rpe">Événement RPE</span>
+            <h3>Fête des écoles</h3>
+            <p class="meta">Samedi 20 juin · Cour de l'école</p>
+            <p>Une journée pour fêter l'année écoulée. Rires, jeux et soleil (on espère !) au programme.</p>
+            <button class="btn">J'y serai</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="evenement">
+          <div class="date-bloc bleu">
+            <div class="jour">23</div>
+            <div class="mois">Juin</div>
+          </div>
+          <div class="evenement-corps">
+            <span class="badge ecole">Sortie scolaire</span>
+            <h3>Matinée d'intégration des futurs PS</h3>
+            <p class="meta">Mardi 23 juin · Matinée</p>
+            <p>Premiers pas à l'école pour les enfants qui rentreront en Petite Section à la rentrée.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="evenement">
+          <div class="date-bloc bleu">
+            <div class="jour">📅</div>
+            <div class="mois">Juin</div>
+          </div>
+          <div class="evenement-corps">
+            <span class="badge ecole">Sortie scolaire</span>
+            <h3>Sortie à l'aquarium Sea Life</h3>
+            <p class="meta">Date à confirmer · Semaine de l'eau</p>
+            <p>Sortie pour toutes les classes. Devis transport en cours.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="evenement">
+          <div class="date-bloc bleu">
+            <div class="jour">📅</div>
+            <div class="mois">Juin</div>
+          </div>
+          <div class="evenement-corps">
+            <span class="badge ecole">Sortie scolaire</span>
+            <h3>Visite d'une caserne de pompiers</h3>
+            <p class="meta">Date à confirmer · Semaine du feu</p>
+            <p>En écho à la venue des pompiers à l'école plus tôt dans l'année.</p>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <h3 class="sous-section">Le calendrier RPE de l'année</h3>
+    <div class="grille">
+      <article class="card">
+        <div class="evenement">
+          <div class="date-bloc jaune">
+            <div class="jour">15</div>
+            <div class="mois">Nov</div>
+          </div>
+          <div class="evenement-corps">
+            <span class="badge passe">Passé</span>
+            <h3>Ciné Familles</h3>
+            <p class="meta">Samedi 15 novembre 2025</p>
+            <p>Fin d'aprem cinéma pour petits et grands. Popcorn, gâteaux et apéro à l'affiche !</p>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="evenement">
+          <div class="date-bloc rose">
+            <div class="jour">07</div>
+            <div class="mois">Déc</div>
+          </div>
+          <div class="evenement-corps">
+            <span class="badge passe">Passé</span>
+            <h3>Marché de Noël</h3>
+            <p class="meta">Dimanche 7 décembre 2025</p>
+            <p>Lutins, sablés et chansons d'hiver. De quoi patienter avant le passage du Père-Noël !</p>
+          </div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="evenement">
+          <div class="date-bloc bleu">
+            <div class="jour">11</div>
+            <div class="mois">Avr</div>
+          </div>
+          <div class="evenement-corps">
+            <span class="badge passe">Passé</span>
+            <h3>Loto de l'Ambiance</h3>
+            <p class="meta">Samedi 11 avril 2026</p>
+            <p>Soirée conviviale avec de nombreux lots à gagner.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+</section>
+
+<section class="page" id="page-questions">
+  <main>
+    <h2 class="section-titre">Questions / Réponses</h2>
+    <p class="section-intro">Posez votre question aux représentants des parents. Elle pourra être relayée auprès de l'école ou de la municipalité, et sa réponse sera publiée ici.</p>
+
+    <div class="qr-formulaire">
+      <h3>Poser une nouvelle question</h3>
+      <input type="text" placeholder="Votre prénom (ou anonyme)">
+      <input type="text" placeholder="Sujet de votre question">
+      <textarea rows="4" placeholder="Détaillez votre question..."></textarea>
+      <button class="btn">Envoyer ma question</button>
+    </div>
+
+    <p style="font-size: 13px; color: var(--gris-doux); margin-bottom: 16px;"><em>Exemples de questions remontées lors du dernier conseil d'école (31 mars 2026) :</em></p>
+
+    <div class="question-item">
+      <div class="q">Serait-il possible de faire rester des enfants au centre de loisirs lors des sorties lointaines ? Les journées sont longues.</div>
+      <div class="auteur">Posée par un parent · CE du 31 mars</div>
+      <div class="reponse">
+        <div class="auteur-rep">Réponse de M. Dahmane (élu municipal)</div>
+        Il est convenu de présenter le planning des sorties qui auront lieu lors des congés aux représentants de parents d'élèves des deux écoles avant validation.
+      </div>
+    </div>
+
+    <div class="question-item">
+      <div class="q">Beaucoup d'enfants semblent avoir faim en rentrant chez eux. Certains se plaignent de la quantité à la cantine. Qu'en est-il ?</div>
+      <div class="auteur">Posée par un parent · CE du 31 mars</div>
+      <div class="reponse">
+        <div class="auteur-rep">Réponse de Mme Esteves (responsable périscolaire)</div>
+        Le grammage est réglementé. Ce qui reste est systématiquement redonné aux enfants qui en font la demande. Deux morceaux de pain leur sont également donnés : un en début de repas, un au dessert.
+      </div>
+    </div>
+
+    <div class="question-item">
+      <div class="q">Les tables de la cantine semblent bancales, les verres tomberaient régulièrement.</div>
+      <div class="auteur">Posée par un parent · CE du 31 mars</div>
+      <div class="reponse">
+        <div class="auteur-rep">Réponse de Mme Esteves (responsable périscolaire)</div>
+        Aucune table n'est cassée à ce jour. Si certaines sont bancales, elles seront réparées par le service technique. Pour l'instant, ce n'est pas le cas.
+      </div>
+    </div>
+
+    <div class="question-item">
+      <div class="q">Le contrat de l'ATSEM affectée à la classe des GS sera-t-il reconduit l'an prochain ?</div>
+      <div class="auteur">Posée par les RPE · CE du 31 mars</div>
+      <div class="reponse-attente">⏳ En attente — la municipalité ne peut pas se prononcer dans l'immédiat (incertitude sur la pérennisation de la troisième classe)</div>
+    </div>
+  </main>
+</section>
+
+<section class="page" id="page-rpe">
+  <main>
+    <h2 class="section-titre">Vos représentants des parents d'élèves</h2>
+    <p class="section-intro">Élus en octobre, ces 6 parents bénévoles vous représentent au conseil d'école et organisent les événements pour la coopérative scolaire.</p>
+
+    <div class="info-bloc">
+      <h3>📧 Nous contacter</h3>
+      <p>Pour toute question, suggestion ou pour rejoindre l'équipe : <a href="mailto:rpe.ecolelaplaine@gmail.com">rpe.ecolelaplaine@gmail.com</a></p>
+      <p style="color: var(--gris-doux);">RPE de l'école du Centre : <a href="mailto:rpeecolelecentre@gmail.com">rpeecolelecentre@gmail.com</a></p>
+    </div>
+
+    <h3 class="sous-section">Titulaires</h3>
+    <div class="rpe-grille">
+      <div class="rpe-card">
+        <div class="avatar c1">G</div>
+        <h3>M. Godet</h3>
+        <div class="role">Titulaire</div>
+        <p>Représentant au conseil d'école.</p>
+        <a href="mailto:rpe.ecolelaplaine@gmail.com" class="btn btn-secondaire">Contacter</a>
+      </div>
+      <div class="rpe-card">
+        <div class="avatar c2">H</div>
+        <h3>M. Hoareau</h3>
+        <div class="role">Titulaire</div>
+        <p>Représentant au conseil d'école.</p>
+        <a href="mailto:rpe.ecolelaplaine@gmail.com" class="btn btn-secondaire">Contacter</a>
+      </div>
+      <div class="rpe-card">
+        <div class="avatar c3">J</div>
+        <h3>Mme Janin</h3>
+        <div class="role">Titulaire</div>
+        <p>Représentante au conseil d'école.</p>
+        <a href="mailto:rpe.ecolelaplaine@gmail.com" class="btn btn-secondaire">Contacter</a>
+      </div>
+    </div>
+
+    <h3 class="sous-section">Suppléantes</h3>
+    <div class="rpe-grille">
+      <div class="rpe-card">
+        <div class="avatar c4">F</div>
+        <h3>Mme Ferrier</h3>
+        <div class="role">Suppléante</div>
+        <p>Remplace les titulaires en cas d'absence.</p>
+        <a href="mailto:rpe.ecolelaplaine@gmail.com" class="btn btn-secondaire">Contacter</a>
+      </div>
+      <div class="rpe-card">
+        <div class="avatar c5">M</div>
+        <h3>Mme Mondou</h3>
+        <div class="role">Suppléante</div>
+        <p>Remplace les titulaires en cas d'absence.</p>
+        <a href="mailto:rpe.ecolelaplaine@gmail.com" class="btn btn-secondaire">Contacter</a>
+      </div>
+      <div class="rpe-card">
+        <div class="avatar c6">V</div>
+        <h3>Mme Vincent</h3>
+        <div class="role">Suppléante</div>
+        <p>Remplace les titulaires en cas d'absence.</p>
+        <a href="mailto:rpe.ecolelaplaine@gmail.com" class="btn btn-secondaire">Contacter</a>
+      </div>
+    </div>
+
+    <div class="info-bloc" style="margin-top: 32px;">
+      <h3>Notre rôle</h3>
+      <p>Nous siégeons aux trois conseils d'école de l'année (novembre, mars, juin) pour faire entendre la voix des parents auprès de la directrice, de l'équipe enseignante et de la municipalité.</p>
+      <p>Nous organisons aussi des événements (Ciné Familles, Marché de Noël, Loto, Cross déguisé, Fête des écoles) dont les bénéfices sont reversés à la coopérative scolaire pour financer les sorties et le matériel des classes.</p>
+    </div>
+  </main>
+</section>
+
+<section class="page" id="page-documents">
+  <main>
+    <h2 class="section-titre">Comptes-rendus et documents</h2>
+    <p class="section-intro">Le conseil d'école se réunit trois fois par an. Retrouvez ici les procès-verbaux officiels et le règlement intérieur de l'école.</p>
+
+    <div class="doc-liste">
+      <div class="doc-item">
+        <div class="doc-icone">PDF</div>
+        <div class="doc-info">
+          <h4>PV Conseil d'école n°2 — 31 mars 2026</h4>
+          <div class="meta">2e trimestre · Projets, sécurité, mairie, coopérative, actions à venir</div>
+        </div>
+        <a href="#" class="doc-action">Télécharger →</a>
+      </div>
+      <div class="doc-item">
+        <div class="doc-icone">PDF</div>
+        <div class="doc-info">
+          <h4>PV Conseil d'école n°1 — 4 novembre 2025</h4>
+          <div class="meta">1er trimestre · Rentrée, effectifs, premier bilan</div>
+        </div>
+        <a href="#" class="doc-action">Télécharger →</a>
+      </div>
+      <div class="doc-item">
+        <div class="doc-icone">PDF</div>
+        <div class="doc-info">
+          <h4>Règlement intérieur de l'école — 2025–2026</h4>
+          <div class="meta">Mis à jour à la rentrée 2025</div>
+        </div>
+        <a href="#" class="doc-action">Télécharger →</a>
+      </div>
+    </div>
+
+    <div class="info-bloc" style="margin-top: 28px;">
+      <h3>📌 À savoir</h3>
+      <p>Le PV du 3e conseil d'école sera publié ici après sa tenue (juin 2026).</p>
+      <p>Une question sur un point d'un compte-rendu ? Posez-la dans l'<a href="#" data-page-link="questions">espace questions</a>.</p>
+    </div>
+  </main>
+</section>
+
+<footer>
+  <p><strong>Représentants des parents d'élèves — École maternelle de la Plaine, Chevannes</strong></p>
+  <p><a href="mailto:rpe.ecolelaplaine@gmail.com">rpe.ecolelaplaine@gmail.com</a> · Maquette de démonstration</p>
+</footer>
+
+<script>
+  const boutons = document.querySelectorAll('[data-page]');
+  const liensPage = document.querySelectorAll('[data-page-link]');
+  const pages = document.querySelectorAll('.page');
+  const navBtns = document.querySelectorAll('.nav-btn');
+
+  function aller(cible) {
+    pages.forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + cible).classList.add('active');
+    navBtns.forEach(b => b.classList.remove('active'));
+    const navActive = document.querySelector('.nav-btn[data-page="' + cible + '"]');
+    if (navActive) navActive.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  boutons.forEach(btn => {
+    btn.addEventListener('click', () => aller(btn.dataset.page));
+  });
+  liensPage.forEach(lien => {
+    lien.addEventListener('click', (e) => {
+      e.preventDefault();
+      aller(lien.dataset.pageLink);
+    });
+  });
+</script>
+
+</body>
+</html>
