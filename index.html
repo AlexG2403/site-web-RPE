@@ -4,66 +4,101 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RPE — École maternelle de la Plaine, Chevannes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --violet: #7e3c9c;
-    --bleu: #2563a8;
-    --bleu-clair: #e8f1fb;
-    --jaune: #f5b942;
-    --vert: #6bb05f;
-    --teal: #5fa8a0;
-    --rose: #e87a8a;
-    --corail: #e8645a;
-    --gris-fond: #faf7f2;
-    --gris-texte: #2a2a2a;
-    --gris-doux: #6b6b6b;
-    --bordure: #e5e1d9;
-    --radius: 14px;
-    --ombre: 0 2px 12px rgba(0,0,0,0.06);
+    --sable: #faf1de;
+    --sable-deep: #f3e3c2;
+    --creme: #fefaf0;
+    --terre: #2d1f12;
+    --terre-soft: #5c4634;
+    --terre-mute: #8a7559;
+    --line: #e6d8b9;
+    --terracotta: #d96b4a;
+    --terracotta-soft: #f4c8b6;
+    --soleil: #e8b53a;
+    --soleil-soft: #fae8b3;
+    --olive: #7a8a3e;
+    --olive-soft: #d6dcb0;
+    --prune: #8e5a82;
+    --prune-soft: #e6cce0;
+    --ciel: #7eaecf;
+    --ciel-soft: #cce0ee;
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --hand: 'Caveat', cursive;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background: var(--gris-fond);
-    color: var(--gris-texte);
-    line-height: 1.55;
-    min-height: 100vh;
+    font-family: var(--sans);
+    background: var(--sable);
+    color: var(--terre);
+    line-height: 1.6;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(circle at 15% 20%, var(--terracotta-soft) 0%, transparent 25%),
+      radial-gradient(circle at 85% 60%, var(--olive-soft) 0%, transparent 30%),
+      radial-gradient(circle at 50% 90%, var(--ciel-soft) 0%, transparent 25%);
+    background-attachment: fixed;
   }
-  a { color: var(--bleu); text-decoration: none; }
-  a:hover { text-decoration: underline; }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; }
 
+  /* ===== HEADER ===== */
   header.site {
-    background: white;
-    border-bottom: 1px solid var(--bordure);
-    padding: 18px 32px;
+    background: rgba(250, 241, 222, 0.92);
+    border-bottom: 1px solid var(--line);
+    padding: 20px 36px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 20px;
     position: sticky;
     top: 0;
     z-index: 100;
+    backdrop-filter: blur(10px);
   }
-  .logo {
+  .brand {
     display: flex;
     align-items: center;
-    gap: 12px;
-    font-weight: 700;
-    font-size: 16px;
-    color: var(--violet);
+    gap: 14px;
+    cursor: pointer;
   }
-  .logo-mark {
-    width: 42px; height: 42px;
-    background: linear-gradient(135deg, var(--jaune) 0%, var(--rose) 50%, var(--teal) 100%);
-    border-radius: 12px;
+  .brand-mark {
+    width: 44px; height: 44px;
+    background: var(--terracotta);
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 22px;
+    color: var(--creme);
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 20px;
+    font-style: italic;
+    transform: rotate(-4deg);
+    box-shadow: 2px 3px 0 var(--terre);
   }
-  .logo small { display: block; font-weight: 400; color: var(--gris-doux); font-size: 12px; }
-
+  .brand-text {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  .brand-text small {
+    display: block;
+    font-family: var(--hand);
+    font-weight: 500;
+    color: var(--terracotta);
+    font-size: 16px;
+    margin-top: 2px;
+  }
   nav.principal {
     display: flex;
     gap: 4px;
@@ -73,754 +108,943 @@
     background: transparent;
     border: none;
     padding: 9px 16px;
-    border-radius: 8px;
     font-size: 14px;
     font-weight: 500;
-    color: var(--gris-texte);
-    cursor: pointer;
-    transition: all 0.15s;
-    font-family: inherit;
+    color: var(--terre-soft);
+    border-radius: 100px;
+    transition: all 0.2s;
   }
-  nav.principal button:hover { background: #f3eaf7; }
+  nav.principal button:hover { color: var(--terre); background: rgba(45, 31, 18, 0.06); }
   nav.principal button.active {
-    background: var(--violet);
-    color: white;
+    background: var(--terre);
+    color: var(--creme);
   }
 
-  .hero {
-    background: linear-gradient(135deg, var(--violet) 0%, #a559c4 100%);
-    color: white;
-    padding: 56px 32px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -30px; left: -30px;
-    width: 120px; height: 120px;
-    background: var(--jaune);
-    border-radius: 50%;
-    opacity: 0.25;
-  }
-  .hero::after {
-    content: '';
-    position: absolute;
-    bottom: -40px; right: -20px;
-    width: 160px; height: 160px;
-    background: var(--rose);
-    border-radius: 50%;
-    opacity: 0.25;
-  }
-  .hero h1 {
-    font-size: 36px;
-    margin-bottom: 12px;
-    font-weight: 700;
-    position: relative;
-  }
-  .hero p {
-    font-size: 17px;
-    opacity: 0.95;
-    max-width: 680px;
-    margin: 0 auto;
-    position: relative;
-  }
-  .hero .sous-titre {
-    display: inline-block;
-    background: rgba(255,255,255,0.2);
-    padding: 4px 14px;
-    border-radius: 20px;
-    font-size: 13px;
-    margin-bottom: 16px;
-    letter-spacing: 0.3px;
-    position: relative;
-  }
-
+  /* ===== LAYOUT ===== */
   main {
-    max-width: 1100px;
+    max-width: 1180px;
     margin: 0 auto;
-    padding: 40px 24px 80px;
+    padding: 0 36px;
   }
-  .page { display: none; }
+  .page { display: none; animation: fadeIn 0.35s ease; }
   .page.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-  h2.section-titre {
-    font-size: 28px;
+  /* ===== TYPOGRAPHY ===== */
+  h1, h2, h3, h4 {
+    font-family: var(--serif);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .eyebrow {
+    font-family: var(--hand);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--terracotta);
     margin-bottom: 8px;
-    color: var(--violet);
+    display: inline-block;
+    transform: rotate(-1deg);
   }
-  h2.section-titre + .section-intro { margin-bottom: 28px; }
-  h3.sous-section {
-    font-size: 18px;
-    margin: 36px 0 16px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid var(--bordure);
-    color: var(--gris-texte);
+
+  /* ===== HERO ===== */
+  .hero-accueil {
+    padding: 72px 36px 32px;
+    max-width: 1180px;
+    margin: 0 auto;
+    position: relative;
   }
-  .section-intro {
-    color: var(--gris-doux);
+  .hero-accueil::before {
+    content: '✺';
+    position: absolute;
+    top: 80px;
+    right: 5%;
+    font-size: 60px;
+    color: var(--soleil);
+    opacity: 0.6;
+    transform: rotate(15deg);
+  }
+  .hero-accueil::after {
+    content: '✿';
+    position: absolute;
+    bottom: 100px;
+    right: 12%;
+    font-size: 36px;
+    color: var(--terracotta);
+    opacity: 0.5;
+  }
+  .hero-accueil h1 {
+    font-size: clamp(44px, 7.5vw, 88px);
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 24px;
+    letter-spacing: -0.03em;
+  }
+  .hero-accueil h1 em {
+    font-style: italic;
+    font-weight: 600;
+    color: var(--terracotta);
+    position: relative;
+  }
+  .hero-accueil h1 em::after {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: var(--soleil);
+    opacity: 0.5;
+    z-index: -1;
+    border-radius: 100px;
+  }
+  .hero-accueil .lead {
+    font-size: 19px;
+    color: var(--terre-soft);
+    max-width: 580px;
+    line-height: 1.55;
     margin-bottom: 32px;
-    font-size: 15px;
+  }
+  .hero-bandeau {
+    display: flex;
+    gap: 36px;
+    flex-wrap: wrap;
+    padding-top: 28px;
+    border-top: 2px dashed var(--line);
+    color: var(--terre-mute);
+    font-size: 14px;
+  }
+  .hero-bandeau strong {
+    color: var(--terre);
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 700;
+    margin-right: 4px;
   }
 
-  .grille {
-    display: grid;
-    gap: 20px;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  /* ===== SECTION HEADS ===== */
+  .section-head {
+    padding: 64px 0 32px;
+    margin-bottom: 32px;
+    border-bottom: 2px dashed var(--line);
   }
-  .card {
-    background: white;
-    border-radius: var(--radius);
-    padding: 22px;
-    box-shadow: var(--ombre);
-    border: 1px solid var(--bordure);
-    transition: transform 0.15s, box-shadow 0.15s;
+  .section-head h2 {
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 700;
+    margin-bottom: 12px;
   }
-  .card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+  .section-head .lead {
+    font-size: 17px;
+    color: var(--terre-soft);
+    max-width: 620px;
+  }
+  .sub-section {
+    margin: 56px 0 24px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .sub-section h3 {
+    font-size: 28px;
+    font-weight: 600;
+  }
+  .sub-section .compte {
+    font-family: var(--hand);
+    font-size: 20px;
+    color: var(--terracotta);
+    font-weight: 700;
+    transform: rotate(-2deg);
+    display: inline-block;
+  }
 
+  /* ===== ACCUEIL TUILES ===== */
   .accueil-grille {
     display: grid;
-    gap: 20px;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    margin-top: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+    margin-top: 32px;
+    margin-bottom: 56px;
   }
   .tuile {
-    background: white;
-    border-radius: var(--radius);
-    padding: 28px 22px;
-    border: 1px solid var(--bordure);
+    border: 2px solid var(--terre);
+    padding: 28px 24px 24px;
+    text-align: left;
+    transition: all 0.25s ease;
+    border-radius: 18px;
+    width: 100%;
+    box-shadow: 4px 5px 0 var(--terre);
+    position: relative;
+  }
+  .tuile:hover {
+    transform: translate(-2px, -3px);
+    box-shadow: 6px 8px 0 var(--terre);
+  }
+  .tuile.t1 { background: var(--terracotta-soft); }
+  .tuile.t2 { background: var(--soleil-soft); }
+  .tuile.t3 { background: var(--olive-soft); }
+  .tuile.t4 { background: var(--ciel-soft); }
+  .tuile-num {
+    font-family: var(--hand);
+    font-weight: 700;
+    color: var(--terre);
+    font-size: 22px;
+    margin-bottom: 28px;
+    display: inline-block;
+    transform: rotate(-2deg);
+  }
+  .tuile h3 {
+    font-size: 24px;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+  .tuile p {
+    font-size: 14px;
+    color: var(--terre-soft);
+    line-height: 1.5;
+  }
+  .tuile-flèche {
+    margin-top: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--terre);
+    transition: gap 0.2s;
+    font-family: var(--serif);
+    font-style: italic;
+  }
+  .tuile:hover .tuile-flèche { gap: 12px; }
+
+  /* ===== EVENT CARDS (list) ===== */
+  .events-liste {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .event-card {
+    background: var(--creme);
+    border: 2px solid var(--terre);
+    border-radius: 18px;
+    padding: 24px 28px;
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    gap: 28px;
+    align-items: center;
     cursor: pointer;
     transition: all 0.2s;
     text-align: left;
-    box-shadow: var(--ombre);
-    font-family: inherit;
+    width: 100%;
+    font: inherit;
+    color: inherit;
+    box-shadow: 3px 4px 0 var(--terre);
   }
-  .tuile:hover { border-color: var(--violet); transform: translateY(-3px); }
-  .tuile-icone {
-    width: 48px; height: 48px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    margin-bottom: 14px;
+  .event-card:hover {
+    transform: translate(-2px, -3px);
+    box-shadow: 5px 7px 0 var(--terre);
   }
-  .tuile h3 { font-size: 16px; margin-bottom: 6px; }
-  .tuile p { font-size: 13px; color: var(--gris-doux); }
-
-  .evenement {
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
-  }
-  .date-bloc {
-    flex-shrink: 0;
+  .event-date {
+    font-family: var(--serif);
     text-align: center;
-    border-radius: 999px;
-    padding: 10px 16px;
-    min-width: 70px;
-    color: white;
+    background: var(--soleil);
+    border-radius: 14px;
+    padding: 14px 8px;
+    border: 2px solid var(--terre);
   }
-  .date-bloc.jaune { background: var(--jaune); color: #5a3f00; }
-  .date-bloc.rose { background: var(--rose); }
-  .date-bloc.bleu { background: #a8d4eb; color: #1a4a6b; }
-  .date-bloc.teal { background: var(--teal); }
-  .date-bloc.corail { background: var(--corail); }
-  .date-bloc.violet { background: var(--violet); }
-  .date-bloc.vert { background: var(--vert); }
-  .date-bloc .jour {
-    font-size: 22px;
+  .event-date.terracotta { background: var(--terracotta); color: var(--creme); }
+  .event-date.olive { background: var(--olive); color: var(--creme); }
+  .event-date.prune { background: var(--prune); color: var(--creme); }
+  .event-date.ciel { background: var(--ciel); }
+  .event-date .jour {
+    font-size: 38px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .event-date .mois {
+    font-family: var(--sans);
+    font-size: 11px;
     font-weight: 700;
-    line-height: 1.1;
-  }
-  .date-bloc .mois {
-    font-size: 11px;
     text-transform: uppercase;
-    font-weight: 600;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.1em;
+    margin-top: 4px;
   }
-  .evenement-corps h3 { font-size: 17px; margin-bottom: 4px; }
-  .evenement-corps .meta {
-    font-size: 13px;
-    color: var(--gris-doux);
-    margin-bottom: 10px;
+  .event-info h3 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    letter-spacing: -0.015em;
   }
-  .evenement-corps p { font-size: 14px; margin-bottom: 12px; }
-  .badge {
+  .event-info .meta {
+    font-size: 14px;
+    color: var(--terre-mute);
+    margin-bottom: 8px;
+  }
+  .event-info .desc {
+    font-size: 14px;
+    color: var(--terre-soft);
+    max-width: 540px;
+  }
+  .event-tag {
     display: inline-block;
-    padding: 3px 10px;
-    border-radius: 12px;
-    font-size: 11px;
+    font-family: var(--hand);
+    font-size: 18px;
+    font-weight: 700;
+    padding: 2px 12px;
+    border-radius: 100px;
+    margin-bottom: 8px;
+    transform: rotate(-1deg);
+  }
+  .event-tag.rpe { background: var(--soleil-soft); color: #8a6a0e; }
+  .event-tag.ecole { background: var(--ciel-soft); color: #3d6a8a; }
+  .event-tag.passe { background: var(--sable-deep); color: var(--terre-mute); }
+  .event-fleche {
+    font-family: var(--serif);
+    font-size: 32px;
+    color: var(--terre);
+    transition: transform 0.2s;
+  }
+  .event-card:hover .event-fleche { transform: translateX(6px); }
+
+  /* ===== EVENT DETAIL PAGE ===== */
+  .retour {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--terre-soft);
+    font-size: 14px;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.4px;
-    margin-right: 6px;
+    padding: 24px 0 12px;
+    background: transparent;
+    border: none;
+    font-family: var(--serif);
+    font-style: italic;
+  }
+  .retour:hover { color: var(--terracotta); }
+  .event-hero {
+    padding: 24px 0 56px;
+    border-bottom: 2px dashed var(--line);
+    margin-bottom: 56px;
+  }
+  .event-hero h1 {
+    font-size: clamp(42px, 6.5vw, 76px);
+    font-weight: 800;
+    margin: 16px 0 24px;
+    letter-spacing: -0.025em;
+    line-height: 1.02;
+  }
+  .event-hero .lead {
+    font-size: 19px;
+    color: var(--terre-soft);
+    max-width: 680px;
+  }
+  .event-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 24px;
+    margin-top: 32px;
+    padding: 28px;
+    background: var(--creme);
+    border: 2px solid var(--terre);
+    border-radius: 18px;
+    box-shadow: 3px 4px 0 var(--terre);
+  }
+  .event-meta-item .label {
+    font-family: var(--hand);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--terracotta);
     margin-bottom: 4px;
   }
-  .badge.rpe { background: #f3eaf7; color: var(--violet); }
-  .badge.ecole { background: var(--bleu-clair); color: var(--bleu); }
-  .badge.passe { background: #ececec; color: #777; }
-  .btn {
-    background: var(--violet);
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    font-family: inherit;
-  }
-  .btn:hover { background: #5e2c75; }
-  .btn-secondaire {
-    background: white;
-    color: var(--violet);
-    border: 1px solid var(--violet);
-  }
-  .btn-secondaire:hover { background: #f3eaf7; }
-
-  .qr-formulaire {
-    background: white;
-    border-radius: var(--radius);
-    padding: 24px;
-    border: 1px solid var(--bordure);
-    margin-bottom: 32px;
-    box-shadow: var(--ombre);
-  }
-  .qr-formulaire h3 { margin-bottom: 12px; }
-  .qr-formulaire input, .qr-formulaire textarea {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid var(--bordure);
-    border-radius: 8px;
-    font-family: inherit;
-    font-size: 14px;
-    margin-bottom: 12px;
-  }
-  .qr-formulaire input:focus, .qr-formulaire textarea:focus {
-    outline: none;
-    border-color: var(--violet);
-  }
-  .question-item {
-    background: white;
-    border-radius: var(--radius);
-    padding: 20px 22px;
-    border: 1px solid var(--bordure);
-    margin-bottom: 14px;
-    box-shadow: var(--ombre);
-  }
-  .question-item .q {
+  .event-meta-item .value {
+    font-family: var(--serif);
+    font-size: 17px;
     font-weight: 600;
+    color: var(--terre);
+  }
+  .event-content {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 56px;
+    margin-bottom: 80px;
+  }
+  @media (max-width: 800px) {
+    .event-content { grid-template-columns: 1fr; gap: 40px; }
+  }
+  .event-bloc {
+    margin-bottom: 36px;
+  }
+  .event-bloc h3 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    color: var(--terre);
+  }
+  .event-bloc p {
+    color: var(--terre-soft);
+    margin-bottom: 12px;
+    font-size: 16px;
+  }
+  .event-bloc strong { color: var(--terre); }
+  .event-bloc ul {
+    list-style: none;
+    padding: 0;
+  }
+  .event-bloc ul li {
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--line);
+    color: var(--terre-soft);
+    font-size: 15px;
+    display: flex;
+    gap: 12px;
+  }
+  .event-bloc ul li::before {
+    content: '✿';
+    color: var(--terracotta);
+    flex-shrink: 0;
+  }
+
+  /* ===== FORM ===== */
+  .form-card {
+    background: var(--creme);
+    border: 2px solid var(--terre);
+    border-radius: 18px;
+    padding: 32px;
+    position: sticky;
+    top: 100px;
+    box-shadow: 4px 5px 0 var(--terre);
+  }
+  .form-card h3 {
+    font-size: 26px;
+    margin-bottom: 4px;
+  }
+  .form-card .form-sub {
+    font-family: var(--hand);
+    font-size: 18px;
+    color: var(--terracotta);
+    margin-bottom: 24px;
+    line-height: 1.3;
+  }
+  .form-row {
+    margin-bottom: 14px;
+  }
+  .form-row label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--terre);
     margin-bottom: 6px;
   }
+  .form-row input, .form-row select, .form-row textarea {
+    width: 100%;
+    padding: 11px 14px;
+    background: var(--sable);
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 15px;
+    color: var(--terre);
+    transition: border-color 0.15s;
+  }
+  .form-row input:focus, .form-row select:focus, .form-row textarea:focus {
+    outline: none;
+    border-color: var(--terracotta);
+  }
+  .form-row-deux {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .btn {
+    background: var(--terre);
+    color: var(--creme);
+    border: 2px solid var(--terre);
+    padding: 14px 24px;
+    border-radius: 100px;
+    font-size: 15px;
+    font-weight: 600;
+    width: 100%;
+    transition: all 0.15s;
+    margin-top: 4px;
+  }
+  .btn:hover { background: var(--terracotta); border-color: var(--terracotta); transform: translateY(-1px); }
+  .btn-secondaire {
+    background: transparent;
+    color: var(--terre);
+    margin-top: 10px;
+  }
+  .btn-secondaire:hover { background: var(--terre); color: var(--creme); }
+
+  /* ===== Q/R ===== */
+  .qr-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 56px;
+    margin-bottom: 80px;
+  }
+  @media (max-width: 800px) { .qr-wrapper { grid-template-columns: 1fr; gap: 40px; } }
+  .qr-form {
+    background: var(--creme);
+    border: 2px solid var(--terre);
+    border-radius: 18px;
+    padding: 32px;
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+    box-shadow: 4px 5px 0 var(--terre);
+  }
+  .qr-form h3 { font-size: 24px; margin-bottom: 16px; }
+  .qr-liste-titre {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .qr-liste-sous {
+    font-family: var(--hand);
+    font-size: 18px;
+    color: var(--terracotta);
+    margin-bottom: 24px;
+    transform: rotate(-1deg);
+    display: inline-block;
+  }
+  .question-item {
+    background: var(--creme);
+    border: 2px solid var(--terre);
+    border-radius: 18px;
+    padding: 24px 26px;
+    margin-bottom: 16px;
+    box-shadow: 3px 4px 0 var(--terre);
+  }
+  .question-item .q {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
   .question-item .auteur {
-    font-size: 12px;
-    color: var(--gris-doux);
+    font-family: var(--hand);
+    font-size: 17px;
+    color: var(--terracotta);
     margin-bottom: 14px;
   }
   .reponse {
-    background: #f3eaf7;
-    border-left: 3px solid var(--violet);
-    padding: 12px 14px;
-    border-radius: 6px;
-    margin-top: 10px;
+    background: var(--soleil-soft);
+    padding: 14px 18px;
+    border-radius: 12px;
+    color: var(--terre-soft);
+    font-size: 15px;
   }
   .reponse .auteur-rep {
-    font-size: 12px;
-    color: var(--violet);
-    font-weight: 600;
+    font-size: 13px;
+    color: var(--terre);
+    font-weight: 700;
     margin-bottom: 4px;
   }
   .reponse-attente {
-    font-size: 13px;
-    color: var(--gris-doux);
+    background: var(--sable-deep);
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-size: 14px;
+    color: var(--terre-mute);
     font-style: italic;
-    padding: 8px 0;
   }
 
-  .rpe-section { margin-bottom: 32px; }
+  /* ===== RPE ===== */
   .rpe-grille {
     display: grid;
-    gap: 20px;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 56px;
   }
   .rpe-card {
-    background: white;
-    border-radius: var(--radius);
-    padding: 22px;
+    background: var(--creme);
+    padding: 28px 24px;
     text-align: center;
-    border: 1px solid var(--bordure);
-    box-shadow: var(--ombre);
+    border: 2px solid var(--terre);
+    border-radius: 18px;
+    box-shadow: 3px 4px 0 var(--terre);
+    transition: transform 0.15s;
   }
+  .rpe-card:hover { transform: translate(-1px, -2px); }
+  .rpe-card:nth-child(odd) { transform: rotate(-1deg); }
+  .rpe-card:nth-child(even) { transform: rotate(1deg); }
+  .rpe-card:nth-child(odd):hover { transform: rotate(-1deg) translate(-1px, -2px); }
+  .rpe-card:nth-child(even):hover { transform: rotate(1deg) translate(-1px, -2px); }
   .avatar {
     width: 72px; height: 72px;
     border-radius: 50%;
-    margin: 0 auto 12px;
+    margin: 0 auto 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 22px;
-    font-weight: 600;
-    color: white;
-  }
-  .avatar.c1 { background: linear-gradient(135deg, var(--violet), #a559c4); }
-  .avatar.c2 { background: linear-gradient(135deg, var(--jaune), #e69b1f); color: #5a3f00; }
-  .avatar.c3 { background: linear-gradient(135deg, var(--vert), #4a8a40); }
-  .avatar.c4 { background: linear-gradient(135deg, var(--rose), #c75566); }
-  .avatar.c5 { background: linear-gradient(135deg, var(--teal), #3f7e77); }
-  .avatar.c6 { background: linear-gradient(135deg, var(--corail), #b0463d); }
-  .rpe-card h3 { font-size: 16px; margin-bottom: 4px; }
-  .rpe-card .role {
-    font-size: 11px;
-    color: var(--violet);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 10px;
-  }
-  .rpe-card p { font-size: 13px; color: var(--gris-doux); margin-bottom: 14px; }
-
-  .info-bloc {
-    background: white;
-    border-radius: var(--radius);
-    padding: 20px 22px;
-    border: 1px solid var(--bordure);
-    box-shadow: var(--ombre);
-    margin-bottom: 24px;
-  }
-  .info-bloc h3 {
-    color: var(--violet);
-    margin-bottom: 10px;
-    font-size: 16px;
-  }
-  .info-bloc p { font-size: 14px; margin-bottom: 8px; }
-  .info-bloc a { font-weight: 500; }
-
-  .doc-liste {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .doc-item {
-    background: white;
-    border-radius: var(--radius);
-    padding: 16px 20px;
-    border: 1px solid var(--bordure);
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    box-shadow: var(--ombre);
-    transition: transform 0.15s;
-  }
-  .doc-item:hover { transform: translateX(3px); border-color: var(--violet); }
-  .doc-icone {
-    width: 44px; height: 44px;
-    background: #fadce0;
-    color: #b03a4a;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-family: var(--serif);
+    font-size: 32px;
     font-weight: 700;
-    font-size: 12px;
-    flex-shrink: 0;
+    color: var(--creme);
+    border: 2px solid var(--terre);
   }
-  .doc-info { flex-grow: 1; }
-  .doc-info h4 { font-size: 15px; margin-bottom: 2px; }
-  .doc-info .meta { font-size: 12px; color: var(--gris-doux); }
+  .avatar.c1 { background: var(--terracotta); }
+  .avatar.c2 { background: var(--olive); }
+  .avatar.c3 { background: var(--prune); }
+  .avatar.c4 { background: var(--soleil); color: var(--terre); }
+  .avatar.c5 { background: var(--ciel); }
+  .avatar.c6 { background: var(--terre); }
+  .rpe-card h3 {
+    font-size: 19px;
+    margin-bottom: 4px;
+    font-weight: 700;
+  }
+  .rpe-card .role {
+    font-family: var(--hand);
+    font-size: 18px;
+    color: var(--terracotta);
+    margin-bottom: 14px;
+    font-weight: 700;
+  }
+  .rpe-card a {
+    font-size: 14px;
+    color: var(--terre);
+    border-bottom: 2px solid var(--terracotta);
+    padding-bottom: 1px;
+    font-weight: 600;
+  }
+
+  .info-block {
+    background: var(--creme);
+    border: 2px solid var(--terre);
+    padding: 32px;
+    border-radius: 18px;
+    margin-bottom: 24px;
+    box-shadow: 4px 5px 0 var(--terre);
+  }
+  .info-block h3 {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+  .info-block p {
+    color: var(--terre-soft);
+    margin-bottom: 8px;
+  }
+  .info-block a { color: var(--terracotta); border-bottom: 2px solid var(--terracotta); padding-bottom: 1px; font-weight: 600; }
+
+  /* ===== DOCS ===== */
+  .doc-liste { margin-bottom: 56px; display: flex; flex-direction: column; gap: 14px; }
+  .doc-item {
+    background: var(--creme);
+    border: 2px solid var(--terre);
+    border-radius: 18px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 24px;
+    align-items: center;
+    padding: 22px 28px;
+    cursor: pointer;
+    transition: all 0.15s;
+    box-shadow: 3px 4px 0 var(--terre);
+  }
+  .doc-item:hover { transform: translate(-2px, -2px); box-shadow: 5px 6px 0 var(--terre); }
+  .doc-num {
+    font-family: var(--hand);
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--terracotta);
+    width: 40px;
+    transform: rotate(-3deg);
+  }
+  .doc-info h4 {
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .doc-info .meta {
+    font-size: 13px;
+    color: var(--terre-mute);
+  }
   .doc-action {
-    color: var(--violet);
-    font-size: 13px;
-    font-weight: 500;
+    font-family: var(--serif);
+    font-size: 28px;
+    color: var(--terracotta);
+    font-weight: 700;
   }
 
+  /* ===== FOOTER ===== */
   footer {
-    background: white;
-    border-top: 1px solid var(--bordure);
-    padding: 30px 24px;
+    border-top: 2px dashed var(--line);
+    padding: 56px 36px;
     text-align: center;
-    color: var(--gris-doux);
-    font-size: 13px;
+    color: var(--terre-mute);
+    margin-top: 80px;
   }
-  footer p { margin-bottom: 4px; }
-  footer a { color: var(--violet); }
+  footer .signature {
+    font-family: var(--hand);
+    font-size: 28px;
+    color: var(--terracotta);
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+  footer p { font-size: 13px; }
+  footer a { color: var(--terre); border-bottom: 1.5px solid var(--terracotta); padding-bottom: 1px; font-weight: 600; }
 
-  @media (max-width: 600px) {
-    header.site { padding: 14px 18px; }
-    .hero { padding: 40px 20px; }
-    .hero h1 { font-size: 26px; }
-    nav.principal button { padding: 7px 12px; font-size: 13px; }
-    .evenement { flex-direction: column; }
+  @media (max-width: 700px) {
+    main, .hero-accueil { padding-left: 24px; padding-right: 24px; }
+    header.site { padding: 16px 24px; }
+    .event-card { grid-template-columns: 80px 1fr; padding: 18px 20px; gap: 18px; }
+    .event-fleche { display: none; }
+    .event-date .jour { font-size: 28px; }
+    nav.principal { width: 100%; justify-content: flex-start; overflow-x: auto; }
+    nav.principal button { white-space: nowrap; }
+    .accueil-grille { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 
 <header class="site">
-  <div class="logo">
-    <div class="logo-mark">🌸</div>
-    <div>
-      École maternelle de la Plaine
-      <small>Représentants des parents d'élèves · Chevannes</small>
+  <div class="brand" data-page="accueil">
+    <div class="brand-mark">P</div>
+    <div class="brand-text">
+      École de la Plaine
+      <small>Chevannes · côté parents</small>
     </div>
   </div>
   <nav class="principal">
     <button class="nav-btn active" data-page="accueil">Accueil</button>
     <button class="nav-btn" data-page="evenements">Événements</button>
-    <button class="nav-btn" data-page="questions">Questions / Réponses</button>
-    <button class="nav-btn" data-page="rpe">Vos représentants</button>
-    <button class="nav-btn" data-page="documents">Comptes-rendus</button>
+    <button class="nav-btn" data-page="questions">Questions</button>
+    <button class="nav-btn" data-page="rpe">Représentants</button>
+    <button class="nav-btn" data-page="documents">Documents</button>
   </nav>
 </header>
 
+<!-- ===== ACCUEIL ===== -->
 <section class="page active" id="page-accueil">
-  <div class="hero">
-    <span class="sous-titre">Année scolaire 2025–2026</span>
-    <h1>Bienvenue les parents !</h1>
-    <p>Retrouvez ici les événements organisés par les RPE, les sorties scolaires de l'école, les comptes-rendus du conseil d'école, et un espace pour poser vos questions à vos représentants.</p>
+  <div class="hero-accueil">
+    <span class="eyebrow">Bonjour les parents !</span>
+    <h1>Le coin des parents,<br><em>le bien des enfants</em></h1>
+    <p class="lead">Tous les événements de l'école, les comptes-rendus du conseil, et un endroit pour poser vos questions à vos représentants. Au même endroit, sans se prendre la tête.</p>
   </div>
+
   <main>
-    <h2 class="section-titre">Que voulez-vous faire ?</h2>
-    <p class="section-intro">Choisissez un espace ci-dessous pour démarrer.</p>
+    <div class="sub-section">
+      <h3>Que voulez-vous faire&nbsp;?</h3>
+    </div>
     <div class="accueil-grille">
-      <button class="tuile" data-page="evenements">
-        <div class="tuile-icone" style="background: #fef3d8;">📅</div>
+      <button class="tuile t1" data-page="evenements">
+        <div class="tuile-num">n°1</div>
         <h3>Voir les événements</h3>
-        <p>Cross déguisé, kermesse, sorties scolaires : ne ratez rien des temps forts.</p>
+        <p>Cross déguisé, kermesse, sorties scolaires : ne ratez rien.</p>
+        <span class="tuile-flèche">y aller →</span>
       </button>
-      <button class="tuile" data-page="questions">
-        <div class="tuile-icone" style="background: #f3eaf7;">💬</div>
+      <button class="tuile t2" data-page="questions">
+        <div class="tuile-num">n°2</div>
         <h3>Poser une question</h3>
-        <p>Une interrogation ? Les RPE relaient et vous répondent.</p>
+        <p>Une interrogation ? Les RPE relaient et répondent.</p>
+        <span class="tuile-flèche">y aller →</span>
       </button>
-      <button class="tuile" data-page="rpe">
-        <div class="tuile-icone" style="background: #d8e8d4;">👨‍👩‍👧</div>
+      <button class="tuile t3" data-page="rpe">
+        <div class="tuile-num">n°3</div>
         <h3>Vos représentants</h3>
-        <p>Découvrez les 6 parents qui vous représentent au conseil d'école.</p>
+        <p>Les 6 parents qui vous représentent au conseil d'école.</p>
+        <span class="tuile-flèche">y aller →</span>
       </button>
-      <button class="tuile" data-page="documents">
-        <div class="tuile-icone" style="background: #fadce0;">📄</div>
+      <button class="tuile t4" data-page="documents">
+        <div class="tuile-num">n°4</div>
         <h3>Comptes-rendus</h3>
-        <p>Lisez les PV des conseils d'école et le règlement intérieur.</p>
+        <p>Les PV des conseils et le règlement intérieur.</p>
+        <span class="tuile-flèche">y aller →</span>
       </button>
     </div>
 
-    <h3 class="sous-section">À ne pas manquer prochainement</h3>
-    <div class="grille">
-      <article class="card">
-        <div class="evenement">
-          <div class="date-bloc teal">
-            <div class="jour">30</div>
-            <div class="mois">Mai</div>
-          </div>
-          <div class="evenement-corps">
-            <span class="badge rpe">Événement RPE</span>
-            <h3>Cross déguisé</h3>
-            <p class="meta">Samedi 30 mai · La Chevannaise la plus folle de l'année</p>
-            <p>Mélange de Chevannaise et de carnaval. Déguisements et sourires obligatoires !</p>
-          </div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="evenement">
-          <div class="date-bloc corail">
-            <div class="jour">20</div>
-            <div class="mois">Juin</div>
-          </div>
-          <div class="evenement-corps">
-            <span class="badge rpe">Événement RPE</span>
-            <h3>Fête des écoles</h3>
-            <p class="meta">Samedi 20 juin · Une journée pour fêter l'année écoulée</p>
-            <p>Rires, jeux et soleil (on espère !) au programme.</p>
-          </div>
-        </div>
-      </article>
+    <div class="sub-section">
+      <h3>À ne pas manquer</h3>
+      <span class="compte">2 événements à venir !</span>
     </div>
+
+    <div class="events-liste" id="accueil-events"></div>
   </main>
 </section>
 
+<!-- ===== ÉVÉNEMENTS ===== -->
 <section class="page" id="page-evenements">
   <main>
-    <h2 class="section-titre">Calendrier des événements</h2>
-    <p class="section-intro">
-      <span class="badge rpe">Événement RPE</span> Organisé par les représentants des parents d'élèves.
-      <span class="badge ecole" style="margin-left: 12px;">Sortie scolaire</span> Organisée par l'école.
-    </p>
-
-    <h3 class="sous-section">À venir</h3>
-    <div class="grille">
-
-      <article class="card">
-        <div class="evenement">
-          <div class="date-bloc bleu">
-            <div class="jour">05</div>
-            <div class="mois">Mai</div>
-          </div>
-          <div class="evenement-corps">
-            <span class="badge ecole">Sortie scolaire</span>
-            <h3>Olympiades à Champcueil</h3>
-            <p class="meta">Mardi 5 mai · Avec l'école maternelle de Champcueil</p>
-            <p>Une journée sportive pour les élèves. Quelques parents accompagnateurs ont déjà été mobilisés.</p>
-          </div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="evenement">
-          <div class="date-bloc teal">
-            <div class="jour">30</div>
-            <div class="mois">Mai</div>
-          </div>
-          <div class="evenement-corps">
-            <span class="badge rpe">Événement RPE</span>
-            <h3>Cross déguisé</h3>
-            <p class="meta">Samedi 30 mai · La Chevannaise la plus folle de l'année</p>
-            <p>Mélange de Chevannaise et de carnaval. Déguisements et sourires obligatoires !</p>
-            <button class="btn">J'y serai</button>
-            <button class="btn btn-secondaire">Aider à l'organisation</button>
-          </div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="evenement">
-          <div class="date-bloc bleu">
-            <div class="jour">15</div>
-            <div class="mois">Juin</div>
-          </div>
-          <div class="evenement-corps">
-            <span class="badge ecole">Sortie scolaire</span>
-            <h3>Expert en rapaces</h3>
-            <p class="meta">Lundi 15 juin · Dans le cadre de la semaine de l'air</p>
-            <p>Un expert vient à l'école avec ses oiseaux pour une rencontre avec les enfants.</p>
-          </div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="evenement">
-          <div class="date-bloc corail">
-            <div class="jour">20</div>
-            <div class="mois">Juin</div>
-          </div>
-          <div class="evenement-corps">
-            <span class="badge rpe">Événement RPE</span>
-            <h3>Fête des écoles</h3>
-            <p class="meta">Samedi 20 juin · Cour de l'école</p>
-            <p>Une journée pour fêter l'année écoulée. Rires, jeux et soleil (on espère !) au programme.</p>
-            <button class="btn">J'y serai</button>
-          </div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="evenement">
-          <div class="date-bloc bleu">
-            <div class="jour">23</div>
-            <div class="mois">Juin</div>
-          </div>
-          <div class="evenement-corps">
-            <span class="badge ecole">Sortie scolaire</span>
-            <h3>Matinée d'intégration des futurs PS</h3>
-            <p class="meta">Mardi 23 juin · Matinée</p>
-            <p>Premiers pas à l'école pour les enfants qui rentreront en Petite Section à la rentrée.</p>
-          </div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="evenement">
-          <div class="date-bloc bleu">
-            <div class="jour">📅</div>
-            <div class="mois">Juin</div>
-          </div>
-          <div class="evenement-corps">
-            <span class="badge ecole">Sortie scolaire</span>
-            <h3>Sortie à l'aquarium Sea Life</h3>
-            <p class="meta">Date à confirmer · Semaine de l'eau</p>
-            <p>Sortie pour toutes les classes. Devis transport en cours.</p>
-          </div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="evenement">
-          <div class="date-bloc bleu">
-            <div class="jour">📅</div>
-            <div class="mois">Juin</div>
-          </div>
-          <div class="evenement-corps">
-            <span class="badge ecole">Sortie scolaire</span>
-            <h3>Visite d'une caserne de pompiers</h3>
-            <p class="meta">Date à confirmer · Semaine du feu</p>
-            <p>En écho à la venue des pompiers à l'école plus tôt dans l'année.</p>
-          </div>
-        </div>
-      </article>
-
+    <div class="section-head">
+      <span class="eyebrow">le calendrier</span>
+      <h2>Tous les événements</h2>
+      <p class="lead">Cliquez sur un événement pour voir les détails et vous inscrire.</p>
     </div>
 
-    <h3 class="sous-section">Le calendrier RPE de l'année</h3>
-    <div class="grille">
-      <article class="card">
-        <div class="evenement">
-          <div class="date-bloc jaune">
-            <div class="jour">15</div>
-            <div class="mois">Nov</div>
-          </div>
-          <div class="evenement-corps">
-            <span class="badge passe">Passé</span>
-            <h3>Ciné Familles</h3>
-            <p class="meta">Samedi 15 novembre 2025</p>
-            <p>Fin d'aprem cinéma pour petits et grands. Popcorn, gâteaux et apéro à l'affiche !</p>
-          </div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="evenement">
-          <div class="date-bloc rose">
-            <div class="jour">07</div>
-            <div class="mois">Déc</div>
-          </div>
-          <div class="evenement-corps">
-            <span class="badge passe">Passé</span>
-            <h3>Marché de Noël</h3>
-            <p class="meta">Dimanche 7 décembre 2025</p>
-            <p>Lutins, sablés et chansons d'hiver. De quoi patienter avant le passage du Père-Noël !</p>
-          </div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="evenement">
-          <div class="date-bloc bleu">
-            <div class="jour">11</div>
-            <div class="mois">Avr</div>
-          </div>
-          <div class="evenement-corps">
-            <span class="badge passe">Passé</span>
-            <h3>Loto de l'Ambiance</h3>
-            <p class="meta">Samedi 11 avril 2026</p>
-            <p>Soirée conviviale avec de nombreux lots à gagner.</p>
-          </div>
-        </div>
-      </article>
+    <div class="sub-section">
+      <h3>À venir</h3>
+      <span class="compte" id="compte-venir"></span>
+    </div>
+    <div class="events-liste" id="evenements-venir"></div>
+
+    <div class="sub-section">
+      <h3>Cette année</h3>
+      <span class="compte">déjà passés</span>
+    </div>
+    <div class="events-liste" id="evenements-passes"></div>
+  </main>
+</section>
+
+<!-- ===== EVENT DETAIL ===== -->
+<section class="page" id="page-event-detail">
+  <main>
+    <button class="retour" data-page="evenements">← retour aux événements</button>
+    <div class="event-hero">
+      <span class="event-tag" id="ed-tag"></span>
+      <h1 id="ed-title"></h1>
+      <p class="lead" id="ed-baseline"></p>
+      <div class="event-meta-grid" id="ed-meta"></div>
+    </div>
+
+    <div class="event-content">
+      <div id="ed-blocs"></div>
+      <div id="ed-form-zone"></div>
     </div>
   </main>
 </section>
 
+<!-- ===== QUESTIONS ===== -->
 <section class="page" id="page-questions">
   <main>
-    <h2 class="section-titre">Questions / Réponses</h2>
-    <p class="section-intro">Posez votre question aux représentants des parents. Elle pourra être relayée auprès de l'école ou de la municipalité, et sa réponse sera publiée ici.</p>
-
-    <div class="qr-formulaire">
-      <h3>Poser une nouvelle question</h3>
-      <input type="text" placeholder="Votre prénom (ou anonyme)">
-      <input type="text" placeholder="Sujet de votre question">
-      <textarea rows="4" placeholder="Détaillez votre question..."></textarea>
-      <button class="btn">Envoyer ma question</button>
+    <div class="section-head">
+      <span class="eyebrow">on vous écoute</span>
+      <h2>Questions, réponses</h2>
+      <p class="lead">Posez votre question aux représentants. Elle sera relayée auprès de l'école ou de la municipalité, et la réponse publiée ici.</p>
     </div>
 
-    <p style="font-size: 13px; color: var(--gris-doux); margin-bottom: 16px;"><em>Exemples de questions remontées lors du dernier conseil d'école (31 mars 2026) :</em></p>
-
-    <div class="question-item">
-      <div class="q">Serait-il possible de faire rester des enfants au centre de loisirs lors des sorties lointaines ? Les journées sont longues.</div>
-      <div class="auteur">Posée par un parent · CE du 31 mars</div>
-      <div class="reponse">
-        <div class="auteur-rep">Réponse de M. Dahmane (élu municipal)</div>
-        Il est convenu de présenter le planning des sorties qui auront lieu lors des congés aux représentants de parents d'élèves des deux écoles avant validation.
+    <div class="qr-wrapper">
+      <div class="qr-form">
+        <h3>Poser une question</h3>
+        <div class="form-row">
+          <label>Prénom (ou anonyme)</label>
+          <input type="text" placeholder="Votre prénom">
+        </div>
+        <div class="form-row">
+          <label>Sujet</label>
+          <input type="text" placeholder="En quelques mots">
+        </div>
+        <div class="form-row">
+          <label>Votre question</label>
+          <textarea rows="5" placeholder="Détaillez votre question..."></textarea>
+        </div>
+        <button class="btn">Envoyer ma question</button>
       </div>
-    </div>
 
-    <div class="question-item">
-      <div class="q">Beaucoup d'enfants semblent avoir faim en rentrant chez eux. Certains se plaignent de la quantité à la cantine. Qu'en est-il ?</div>
-      <div class="auteur">Posée par un parent · CE du 31 mars</div>
-      <div class="reponse">
-        <div class="auteur-rep">Réponse de Mme Esteves (responsable périscolaire)</div>
-        Le grammage est réglementé. Ce qui reste est systématiquement redonné aux enfants qui en font la demande. Deux morceaux de pain leur sont également donnés : un en début de repas, un au dessert.
+      <div>
+        <h3 class="qr-liste-titre">Questions récentes</h3>
+        <p class="qr-liste-sous">remontées au conseil d'école du 31 mars</p>
+
+        <div class="question-item">
+          <div class="q">Possible de garder les enfants au centre de loisirs lors des sorties lointaines&nbsp;?</div>
+          <div class="auteur">posée par un parent · 31 mars</div>
+          <div class="reponse">
+            <div class="auteur-rep">M. Dahmane · élu municipal</div>
+            Le planning des sorties qui auront lieu lors des congés sera présenté aux représentants des deux écoles avant validation.
+          </div>
+        </div>
+
+        <div class="question-item">
+          <div class="q">Beaucoup d'enfants ont faim en rentrant. Qu'en est-il des quantités à la cantine&nbsp;?</div>
+          <div class="auteur">posée par un parent · 31 mars</div>
+          <div class="reponse">
+            <div class="auteur-rep">Mme Esteves · responsable périscolaire</div>
+            Le grammage est réglementé. Ce qui reste est systématiquement redonné aux enfants qui en font la demande. Deux morceaux de pain leur sont également donnés : un en début de repas, un au dessert.
+          </div>
+        </div>
+
+        <div class="question-item">
+          <div class="q">Les tables de la cantine semblent bancales, les verres tomberaient régulièrement.</div>
+          <div class="auteur">posée par un parent · 31 mars</div>
+          <div class="reponse">
+            <div class="auteur-rep">Mme Esteves · responsable périscolaire</div>
+            Aucune table n'est cassée à ce jour. Si certaines sont bancales, elles seront réparées par le service technique.
+          </div>
+        </div>
+
+        <div class="question-item">
+          <div class="q">Le contrat de l'ATSEM affectée aux GS sera-t-il reconduit l'an prochain&nbsp;?</div>
+          <div class="auteur">posée par les RPE · 31 mars</div>
+          <div class="reponse-attente">⏳ En attente — incertitude sur la pérennisation de la troisième classe.</div>
+        </div>
       </div>
-    </div>
-
-    <div class="question-item">
-      <div class="q">Les tables de la cantine semblent bancales, les verres tomberaient régulièrement.</div>
-      <div class="auteur">Posée par un parent · CE du 31 mars</div>
-      <div class="reponse">
-        <div class="auteur-rep">Réponse de Mme Esteves (responsable périscolaire)</div>
-        Aucune table n'est cassée à ce jour. Si certaines sont bancales, elles seront réparées par le service technique. Pour l'instant, ce n'est pas le cas.
-      </div>
-    </div>
-
-    <div class="question-item">
-      <div class="q">Le contrat de l'ATSEM affectée à la classe des GS sera-t-il reconduit l'an prochain ?</div>
-      <div class="auteur">Posée par les RPE · CE du 31 mars</div>
-      <div class="reponse-attente">⏳ En attente — la municipalité ne peut pas se prononcer dans l'immédiat (incertitude sur la pérennisation de la troisième classe)</div>
     </div>
   </main>
 </section>
 
+<!-- ===== RPE ===== -->
 <section class="page" id="page-rpe">
   <main>
-    <h2 class="section-titre">Vos représentants des parents d'élèves</h2>
-    <p class="section-intro">Élus en octobre, ces 6 parents bénévoles vous représentent au conseil d'école et organisent les événements pour la coopérative scolaire.</p>
-
-    <div class="info-bloc">
-      <h3>📧 Nous contacter</h3>
-      <p>Pour toute question, suggestion ou pour rejoindre l'équipe : <a href="mailto:rpe.ecolelaplaine@gmail.com">rpe.ecolelaplaine@gmail.com</a></p>
-      <p style="color: var(--gris-doux);">RPE de l'école du Centre : <a href="mailto:rpeecolelecentre@gmail.com">rpeecolelecentre@gmail.com</a></p>
+    <div class="section-head">
+      <span class="eyebrow">l'équipe</span>
+      <h2>Vos représentants</h2>
+      <p class="lead">Élus en octobre, ces 6 parents bénévoles vous représentent au conseil d'école et organisent les événements pour la coopérative scolaire.</p>
     </div>
 
-    <h3 class="sous-section">Titulaires</h3>
+    <div class="info-block">
+      <h3>Nous écrire</h3>
+      <p>Pour toute question, suggestion ou pour rejoindre l'équipe : <a href="mailto:rpe.ecolelaplaine@gmail.com">rpe.ecolelaplaine@gmail.com</a></p>
+      <p style="color: var(--terre-mute); font-size: 14px; margin-top: 4px;">RPE de l'école du Centre : <a href="mailto:rpeecolelecentre@gmail.com" style="color: var(--terre-mute); border-bottom-color: var(--terre-mute);">rpeecolelecentre@gmail.com</a></p>
+    </div>
+
+    <div class="sub-section">
+      <h3>Titulaires</h3>
+      <span class="compte">3 représentants</span>
+    </div>
+
     <div class="rpe-grille">
       <div class="rpe-card">
         <div class="avatar c1">G</div>
         <h3>M. Godet</h3>
-        <div class="role">Titulaire</div>
-        <p>Représentant au conseil d'école.</p>
-        <a href="mailto:rpe.ecolelaplaine@gmail.com" class="btn btn-secondaire">Contacter</a>
+        <div class="role">titulaire</div>
+        <a href="mailto:rpe.ecolelaplaine@gmail.com">contacter</a>
       </div>
       <div class="rpe-card">
         <div class="avatar c2">H</div>
         <h3>M. Hoareau</h3>
-        <div class="role">Titulaire</div>
-        <p>Représentant au conseil d'école.</p>
-        <a href="mailto:rpe.ecolelaplaine@gmail.com" class="btn btn-secondaire">Contacter</a>
+        <div class="role">titulaire</div>
+        <a href="mailto:rpe.ecolelaplaine@gmail.com">contacter</a>
       </div>
       <div class="rpe-card">
         <div class="avatar c3">J</div>
         <h3>Mme Janin</h3>
-        <div class="role">Titulaire</div>
-        <p>Représentante au conseil d'école.</p>
-        <a href="mailto:rpe.ecolelaplaine@gmail.com" class="btn btn-secondaire">Contacter</a>
+        <div class="role">titulaire</div>
+        <a href="mailto:rpe.ecolelaplaine@gmail.com">contacter</a>
       </div>
     </div>
 
-    <h3 class="sous-section">Suppléantes</h3>
+    <div class="sub-section">
+      <h3>Suppléantes</h3>
+      <span class="compte">3 représentantes</span>
+    </div>
+
     <div class="rpe-grille">
       <div class="rpe-card">
         <div class="avatar c4">F</div>
         <h3>Mme Ferrier</h3>
-        <div class="role">Suppléante</div>
-        <p>Remplace les titulaires en cas d'absence.</p>
-        <a href="mailto:rpe.ecolelaplaine@gmail.com" class="btn btn-secondaire">Contacter</a>
+        <div class="role">suppléante</div>
+        <a href="mailto:rpe.ecolelaplaine@gmail.com">contacter</a>
       </div>
       <div class="rpe-card">
         <div class="avatar c5">M</div>
         <h3>Mme Mondou</h3>
-        <div class="role">Suppléante</div>
-        <p>Remplace les titulaires en cas d'absence.</p>
-        <a href="mailto:rpe.ecolelaplaine@gmail.com" class="btn btn-secondaire">Contacter</a>
+        <div class="role">suppléante</div>
+        <a href="mailto:rpe.ecolelaplaine@gmail.com">contacter</a>
       </div>
       <div class="rpe-card">
         <div class="avatar c6">V</div>
         <h3>Mme Vincent</h3>
-        <div class="role">Suppléante</div>
-        <p>Remplace les titulaires en cas d'absence.</p>
-        <a href="mailto:rpe.ecolelaplaine@gmail.com" class="btn btn-secondaire">Contacter</a>
+        <div class="role">suppléante</div>
+        <a href="mailto:rpe.ecolelaplaine@gmail.com">contacter</a>
       </div>
     </div>
 
-    <div class="info-bloc" style="margin-top: 32px;">
+    <div class="info-block">
       <h3>Notre rôle</h3>
       <p>Nous siégeons aux trois conseils d'école de l'année (novembre, mars, juin) pour faire entendre la voix des parents auprès de la directrice, de l'équipe enseignante et de la municipalité.</p>
       <p>Nous organisons aussi des événements (Ciné Familles, Marché de Noël, Loto, Cross déguisé, Fête des écoles) dont les bénéfices sont reversés à la coopérative scolaire pour financer les sorties et le matériel des classes.</p>
@@ -828,75 +1052,335 @@
   </main>
 </section>
 
+<!-- ===== DOCUMENTS ===== -->
 <section class="page" id="page-documents">
   <main>
-    <h2 class="section-titre">Comptes-rendus et documents</h2>
-    <p class="section-intro">Le conseil d'école se réunit trois fois par an. Retrouvez ici les procès-verbaux officiels et le règlement intérieur de l'école.</p>
+    <div class="section-head">
+      <span class="eyebrow">les archives</span>
+      <h2>Documents officiels</h2>
+      <p class="lead">Procès-verbaux des conseils d'école et règlement intérieur.</p>
+    </div>
 
     <div class="doc-liste">
       <div class="doc-item">
-        <div class="doc-icone">PDF</div>
+        <div class="doc-num">n°3</div>
         <div class="doc-info">
           <h4>PV Conseil d'école n°2 — 31 mars 2026</h4>
           <div class="meta">2e trimestre · Projets, sécurité, mairie, coopérative, actions à venir</div>
         </div>
-        <a href="#" class="doc-action">Télécharger →</a>
+        <span class="doc-action">↓</span>
       </div>
       <div class="doc-item">
-        <div class="doc-icone">PDF</div>
+        <div class="doc-num">n°2</div>
         <div class="doc-info">
           <h4>PV Conseil d'école n°1 — 4 novembre 2025</h4>
           <div class="meta">1er trimestre · Rentrée, effectifs, premier bilan</div>
         </div>
-        <a href="#" class="doc-action">Télécharger →</a>
+        <span class="doc-action">↓</span>
       </div>
       <div class="doc-item">
-        <div class="doc-icone">PDF</div>
+        <div class="doc-num">n°1</div>
         <div class="doc-info">
-          <h4>Règlement intérieur de l'école — 2025–2026</h4>
+          <h4>Règlement intérieur — 2025–2026</h4>
           <div class="meta">Mis à jour à la rentrée 2025</div>
         </div>
-        <a href="#" class="doc-action">Télécharger →</a>
+        <span class="doc-action">↓</span>
       </div>
     </div>
 
-    <div class="info-bloc" style="margin-top: 28px;">
-      <h3>📌 À savoir</h3>
+    <div class="info-block">
+      <h3>À savoir</h3>
       <p>Le PV du 3e conseil d'école sera publié ici après sa tenue (juin 2026).</p>
-      <p>Une question sur un point d'un compte-rendu ? Posez-la dans l'<a href="#" data-page-link="questions">espace questions</a>.</p>
     </div>
   </main>
 </section>
 
 <footer>
-  <p><strong>Représentants des parents d'élèves — École maternelle de la Plaine, Chevannes</strong></p>
-  <p><a href="mailto:rpe.ecolelaplaine@gmail.com">rpe.ecolelaplaine@gmail.com</a> · Maquette de démonstration</p>
+  <p class="signature">— Avec ❤ par vos RPE —</p>
+  <p>École maternelle de la Plaine, Chevannes · <a href="mailto:rpe.ecolelaplaine@gmail.com">rpe.ecolelaplaine@gmail.com</a></p>
 </footer>
 
 <script>
-  const boutons = document.querySelectorAll('[data-page]');
-  const liensPage = document.querySelectorAll('[data-page-link]');
-  const pages = document.querySelectorAll('.page');
-  const navBtns = document.querySelectorAll('.nav-btn');
-
-  function aller(cible) {
-    pages.forEach(p => p.classList.remove('active'));
-    document.getElementById('page-' + cible).classList.add('active');
-    navBtns.forEach(b => b.classList.remove('active'));
-    const navActive = document.querySelector('.nav-btn[data-page="' + cible + '"]');
-    if (navActive) navActive.classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+const EVENTS = {
+  'olympiades': {
+    type: 'ecole', tag: 'sortie scolaire', dateColor: 'ciel',
+    title: 'Olympiades à Champcueil',
+    baseline: 'Une journée sportive avec l\'école maternelle de Champcueil.',
+    jour: '05', mois: 'Mai', dateLong: 'Mardi 5 mai 2026',
+    horaire: 'Journée complète',
+    lieu: 'École maternelle de Champcueil',
+    public: 'Toutes les classes',
+    blocs: [
+      { titre: 'Au programme', html: '<p>Une journée d\'olympiades partagée avec les enfants de l\'école maternelle de Champcueil. Activités sportives variées, en équipes mixtes inter-écoles.</p>' },
+      { titre: 'Accompagnateurs', html: '<p>Quelques parents ont déjà été mobilisés. L\'équipe enseignante les remercie : sans eux, les conditions ne seraient pas idéales.</p>' },
+      { titre: 'À prévoir pour votre enfant', html: '<ul><li>Tenue sportive et baskets</li><li>Casquette</li><li>Gourde d\'eau</li><li>Pique-nique froid</li></ul>' }
+    ],
+    inscription: false
+  },
+  'cross': {
+    type: 'rpe', tag: 'événement RPE', dateColor: 'olive',
+    title: 'Cross déguisé',
+    baseline: 'Le mélange unique de la Chevannaise et du carnaval. Déguisements obligatoires, sourires garantis.',
+    jour: '30', mois: 'Mai', dateLong: 'Samedi 30 mai 2026',
+    horaire: '14h00 — 17h30',
+    lieu: 'Cour de l\'école · Chevannes',
+    public: 'Familles, parents, enfants',
+    blocs: [
+      { titre: 'Au programme', html: '<p>Une après-midi conviviale qui mélange la traditionnelle Chevannaise et un esprit carnaval. Les enfants courent en duo avec un adulte sur un parcours adapté à leur classe (PS, MS, GS), tous déguisés.</p><p>Goûter offert à l\'arrivée, photos, podium en bois et médailles maison pour tous les participants.</p>' },
+      { titre: 'Pourquoi participer', html: '<p>Les bénéfices (inscriptions, buvette) sont entièrement reversés à la coopérative scolaire. Ils financent les sorties et le matériel pédagogique des classes pour l\'année suivante.</p>' },
+      { titre: 'À prévoir', html: '<ul><li>Un déguisement (le plus fou est le mieux !)</li><li>Baskets confortables</li><li>Une gourde par participant</li><li>De la bonne humeur</li></ul>' },
+      { titre: 'Bénévoles recherchés', html: '<p>Pour tenir la buvette, le stand maquillage, ou aider à l\'installation/rangement. Cochez la case dans le formulaire d\'inscription si vous êtes partants — même 1h, c\'est utile !</p>' }
+    ],
+    inscription: true,
+    inscriptionTitre: 'Je m\'inscris au cross',
+    inscriptionSous: 'gratuit · participation libre à la coopé'
+  },
+  'rapaces': {
+    type: 'ecole', tag: 'sortie scolaire', dateColor: 'ciel',
+    title: 'Expert en rapaces',
+    baseline: 'Un expert vient à l\'école avec ses oiseaux dans le cadre de la semaine de l\'air.',
+    jour: '15', mois: 'Juin', dateLong: 'Lundi 15 juin 2026',
+    horaire: 'Sur le temps scolaire',
+    lieu: 'Cour de l\'école',
+    public: 'Toutes les classes',
+    blocs: [
+      { titre: 'Au programme', html: '<p>Dans le cadre de la "semaine de l\'air", un fauconnier vient présenter aux enfants ses oiseaux : hiboux, faucons, buses. Démonstration de vol et explications adaptées à l\'âge des enfants.</p>' },
+      { titre: 'Coût', html: '<p>454,42 € pris en charge par la coopérative scolaire (votée au conseil d\'école n°2).</p>' }
+    ],
+    inscription: false
+  },
+  'kermesse': {
+    type: 'rpe', tag: 'événement RPE', dateColor: 'terracotta',
+    title: 'Fête des écoles',
+    baseline: 'Une journée pour fêter l\'année écoulée. Rires, jeux et soleil (on espère !) au programme.',
+    jour: '20', mois: 'Juin', dateLong: 'Samedi 20 juin 2026',
+    horaire: '14h00 — 20h00',
+    lieu: 'Cour de l\'école · Chevannes',
+    public: 'Toutes les familles',
+    blocs: [
+      { titre: 'Au programme', html: '<p>L\'événement le plus attendu de l\'année. Une après-midi qui démarre par les <strong>spectacles préparés par les enfants</strong> (chaque classe), enchaîne avec les <strong>stands de jeux</strong> tenus par les parents bénévoles, et se termine autour d\'un <strong>repas partagé</strong> jusqu\'à la tombée de la nuit.</p><p>Tombola, buvette, barbe à papa, photo souvenir : tout y est.</p>' },
+      { titre: 'Spectacles', html: '<p>Les classes de PS/MS, MS/GS et GS présentent chacune un numéro préparé sur l\'année. Coup d\'envoi à 14h30 précises — pensez à arriver en avance pour avoir une bonne place.</p>' },
+      { titre: 'Repas partagé', html: '<p>Chaque famille amène un plat (salé ou sucré) à partager. Une feuille de coordination circulera fin mai pour éviter d\'avoir 12 quiches et zéro dessert. Boissons fournies par la buvette.</p>' },
+      { titre: 'Bénévoles recherchés', html: '<p>Cette journée ne tient debout que grâce aux parents bénévoles. Tenue d\'un stand de jeu (1h), aide à la buvette (1h), installation à 13h ou rangement à 20h : indiquez vos disponibilités dans le formulaire, on s\'organise.</p>' }
+    ],
+    inscription: true,
+    inscriptionTitre: 'Je viens à la fête !',
+    inscriptionSous: 'présence + un coup de main si possible'
+  },
+  'integration': {
+    type: 'ecole', tag: 'sortie scolaire', dateColor: 'ciel',
+    title: 'Matinée d\'intégration des futurs PS',
+    baseline: 'Premiers pas à l\'école pour les enfants qui rentreront en Petite Section à la rentrée.',
+    jour: '23', mois: 'Juin', dateLong: 'Mardi 23 juin 2026',
+    horaire: 'Matinée',
+    lieu: 'École maternelle de la Plaine',
+    public: 'Futurs PS et leurs parents',
+    blocs: [
+      { titre: 'Au programme', html: '<p>Accueil des futurs élèves de Petite Section pour un premier contact avec l\'école. Visite des locaux, rencontre avec l\'équipe enseignante et les ATSEM, petits ateliers pour découvrir la classe.</p>' },
+      { titre: 'Pour qui', html: '<p>Pour les enfants qui sont déjà inscrits à l\'école pour la rentrée 2026. Si vous n\'êtes pas encore inscrits, contactez la mairie au plus vite.</p>' }
+    ],
+    inscription: false
+  },
+  'sealife': {
+    type: 'ecole', tag: 'sortie scolaire', dateColor: 'ciel',
+    title: 'Sortie à l\'aquarium Sea Life',
+    baseline: 'Sortie pour toutes les classes dans le cadre de la semaine de l\'eau.',
+    jour: '?', mois: 'Juin', dateLong: 'Date à confirmer · Juin 2026',
+    horaire: 'Journée complète',
+    lieu: 'Aquarium Sea Life · Île-de-France',
+    public: 'Toutes les classes',
+    blocs: [
+      { titre: 'Au programme', html: '<p>Visite guidée de l\'aquarium et ateliers pédagogiques sur le thème de l\'eau et de la vie marine. Une sortie qui s\'inscrit dans la "semaine de l\'eau" du mois de juin.</p>' },
+      { titre: 'Statut', html: '<p>Devis en cours pour le transport (deux cars nécessaires, environ 1500–2000€). Billets et ateliers : 560,50 €. Date communiquée dès que le transport sera validé.</p>' }
+    ],
+    inscription: false
+  },
+  'pompiers': {
+    type: 'ecole', tag: 'sortie scolaire', dateColor: 'ciel',
+    title: 'Visite d\'une caserne de pompiers',
+    baseline: 'En écho à la venue des pompiers à l\'école dans le cadre de la semaine du feu.',
+    jour: '?', mois: 'Juin', dateLong: 'Date à confirmer · Juin 2026',
+    horaire: 'Sur le temps scolaire',
+    lieu: 'Caserne affiliée à Chevannes',
+    public: 'Toutes les classes',
+    blocs: [
+      { titre: 'Au programme', html: '<p>Visite de la caserne, présentation des camions et du métier de pompier. La directrice a fait la demande à la mairie pour être mise en contact avec la caserne affiliée à Chevannes.</p>' }
+    ],
+    inscription: false
+  },
+  'cine': {
+    type: 'passe', tag: 'passé · RPE', dateColor: '',
+    title: 'Ciné Familles',
+    baseline: 'Fin d\'aprem cinéma pour petits et grands. Popcorn, gâteaux et apéro à l\'affiche.',
+    jour: '15', mois: 'Nov', dateLong: 'Samedi 15 novembre 2025',
+    horaire: 'Fin d\'après-midi', lieu: 'Salle communale', public: 'Familles',
+    blocs: [
+      { titre: 'Bilan', html: '<p>L\'événement a généré 94,76 € au profit de la coopérative scolaire. Merci aux familles présentes !</p>' }
+    ],
+    inscription: false
+  },
+  'noel': {
+    type: 'passe', tag: 'passé · RPE', dateColor: '',
+    title: 'Marché de Noël',
+    baseline: 'Lutins, sablés et chansons d\'hiver. De quoi patienter avant le passage du Père-Noël.',
+    jour: '07', mois: 'Déc', dateLong: 'Dimanche 7 décembre 2025',
+    horaire: '10h — 17h', lieu: 'Cour de l\'école', public: 'Familles',
+    blocs: [
+      { titre: 'Bilan', html: '<p>527,27 € reversés à la coopérative scolaire. Une belle édition, merci à tous les bénévoles.</p>' }
+    ],
+    inscription: false
+  },
+  'loto': {
+    type: 'passe', tag: 'passé · RPE', dateColor: '',
+    title: 'Loto de l\'Ambiance',
+    baseline: 'Soirée conviviale avec de nombreux lots à gagner.',
+    jour: '11', mois: 'Avr', dateLong: 'Samedi 11 avril 2026',
+    horaire: 'Soirée', lieu: 'Salle communale', public: 'Tous',
+    blocs: [
+      { titre: 'Bilan', html: '<p>Bilan financier en cours de comptabilisation. Merci aux participants et aux donateurs de lots !</p>' }
+    ],
+    inscription: false
   }
+};
 
-  boutons.forEach(btn => {
-    btn.addEventListener('click', () => aller(btn.dataset.page));
+const ORDRE_VENIR = ['olympiades', 'cross', 'rapaces', 'kermesse', 'integration', 'sealife', 'pompiers'];
+const ORDRE_PASSE = ['cine', 'noel', 'loto'];
+const ORDRE_ACCUEIL = ['cross', 'kermesse'];
+
+function aller(cible, eventId) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + cible).classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  const navActive = document.querySelector('.nav-btn[data-page="' + cible + '"]');
+  if (navActive) navActive.classList.add('active');
+  if (cible === 'event-detail' && eventId) renderEventDetail(eventId);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function renderEventCard(id, ev) {
+  const btn = document.createElement('button');
+  btn.className = 'event-card';
+  const dateClass = ev.dateColor ? 'event-date ' + ev.dateColor : 'event-date';
+  btn.innerHTML = `
+    <div class="${dateClass}">
+      <div class="jour">${ev.jour}</div>
+      <div class="mois">${ev.mois}</div>
+    </div>
+    <div class="event-info">
+      <span class="event-tag ${ev.type}">${ev.tag}</span>
+      <h3>${ev.title}</h3>
+      <div class="meta">${ev.dateLong} · ${ev.lieu}</div>
+      <p class="desc">${ev.baseline}</p>
+    </div>
+    <div class="event-fleche">→</div>
+  `;
+  btn.addEventListener('click', () => aller('event-detail', id));
+  return btn;
+}
+
+function renderListes() {
+  const accueilC = document.getElementById('accueil-events');
+  ORDRE_ACCUEIL.forEach(id => accueilC.appendChild(renderEventCard(id, EVENTS[id])));
+
+  const venirC = document.getElementById('evenements-venir');
+  ORDRE_VENIR.forEach(id => venirC.appendChild(renderEventCard(id, EVENTS[id])));
+  document.getElementById('compte-venir').textContent = ORDRE_VENIR.length + ' à venir';
+
+  const passeC = document.getElementById('evenements-passes');
+  ORDRE_PASSE.forEach(id => passeC.appendChild(renderEventCard(id, EVENTS[id])));
+}
+
+function renderEventDetail(id) {
+  const ev = EVENTS[id];
+  if (!ev) return;
+  document.getElementById('ed-tag').className = 'event-tag ' + ev.type;
+  document.getElementById('ed-tag').textContent = ev.tag;
+  document.getElementById('ed-title').textContent = ev.title;
+  document.getElementById('ed-baseline').textContent = ev.baseline;
+
+  const meta = document.getElementById('ed-meta');
+  meta.innerHTML = `
+    <div class="event-meta-item"><div class="label">quand</div><div class="value">${ev.dateLong}</div></div>
+    <div class="event-meta-item"><div class="label">horaire</div><div class="value">${ev.horaire}</div></div>
+    <div class="event-meta-item"><div class="label">où</div><div class="value">${ev.lieu}</div></div>
+    <div class="event-meta-item"><div class="label">pour qui</div><div class="value">${ev.public}</div></div>
+  `;
+
+  const blocs = document.getElementById('ed-blocs');
+  blocs.innerHTML = '';
+  ev.blocs.forEach(b => {
+    const div = document.createElement('div');
+    div.className = 'event-bloc';
+    div.innerHTML = `<h3>${b.titre}</h3>${b.html}`;
+    blocs.appendChild(div);
   });
-  liensPage.forEach(lien => {
-    lien.addEventListener('click', (e) => {
-      e.preventDefault();
-      aller(lien.dataset.pageLink);
-    });
-  });
+
+  const formZone = document.getElementById('ed-form-zone');
+  if (ev.inscription) {
+    formZone.innerHTML = `
+      <div class="form-card">
+        <h3>${ev.inscriptionTitre}</h3>
+        <p class="form-sub">${ev.inscriptionSous}</p>
+        <div class="form-row">
+          <label>Votre nom</label>
+          <input type="text" placeholder="Famille Dupont">
+        </div>
+        <div class="form-row">
+          <label>Email</label>
+          <input type="email" placeholder="vous@email.fr">
+        </div>
+        <div class="form-row-deux">
+          <div class="form-row">
+            <label>Adultes</label>
+            <input type="number" min="0" value="2">
+          </div>
+          <div class="form-row">
+            <label>Enfants</label>
+            <input type="number" min="0" value="1">
+          </div>
+        </div>
+        <div class="form-row">
+          <label>Classe(s) de votre/vos enfant(s)</label>
+          <select>
+            <option>PS</option><option>MS</option><option>GS</option>
+            <option>PS-MS</option><option>MS-GS</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Je peux aider en tant que bénévole</label>
+          <select>
+            <option>Non, je viens en famille</option>
+            <option>Oui, installation (avant)</option>
+            <option>Oui, tenir un stand (pendant)</option>
+            <option>Oui, rangement (après)</option>
+            <option>Oui, à voir avec vous</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Commentaire</label>
+          <textarea rows="3" placeholder="Allergies, besoins particuliers..."></textarea>
+        </div>
+        <button class="btn">Confirmer ma venue</button>
+        <button class="btn btn-secondaire">Ajouter à mon agenda</button>
+      </div>
+    `;
+  } else {
+    formZone.innerHTML = `
+      <div class="form-card">
+        <h3>Bon à savoir</h3>
+        <p class="form-sub">organisé par l'école</p>
+        <p style="font-size: 14px; color: var(--terre-soft); margin-bottom: 20px;">Cet événement est organisé par l'école — pas d'inscription publique nécessaire. Vous recevrez les informations pratiques et autorisations éventuelles via le cahier de liaison de votre enfant.</p>
+        <button class="btn btn-secondaire" style="margin-top: 0;">Ajouter à mon agenda</button>
+      </div>
+    `;
+  }
+}
+
+document.querySelectorAll('[data-page]').forEach(el => {
+  el.addEventListener('click', () => aller(el.dataset.page));
+});
+
+renderListes();
 </script>
 
 </body>
